@@ -3,7 +3,13 @@
 #pragma once
 class Entity
 {
+protected:
+	int _Y=0;
+	int _X=0;
 public:
-	void drawDino(int dinoY);
-	void drawTree(int treeX);
+	void setDinoY(int Y);
+	void setTreeX(int X);
+	inline int Y() { return _Y; }
+	inline int X() { return _X; }
+	virtual void drawEntity();
 };

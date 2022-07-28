@@ -27,6 +27,12 @@
     <ClCompile Include="Color.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="DinoEntity.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeEntity.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -39,6 +45,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DinoEntity.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeEntity.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

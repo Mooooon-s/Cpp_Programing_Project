@@ -31,55 +31,63 @@ void Game_manager::drawScore(int score) {
 	std::cout << "Score: " << score << "\n";
 }
 
+void Game_manager::drawEnd(int score) {
+	std::cout << "\n";
+	std::cout << "\n";
+	std::cout << "            Game Over\n";
+	std::cout << "           " << _Score << "\n";
+	system("pause");
+}
+
 void Game_manager::GameStart() {
 	
-	Entity *entity=new Entity;
+	DinoEntity* dino = new DinoEntity;
+	TreeEntity* tree = new TreeEntity;
 
 	while (true)
 	{
-		// 점수 출력
-		drawScore(nScore);
-
 		// 키 입력 확인
-		nCurKey = GetKeyDown();
-		switch (nCurKey)
+		_CurKey = GetKeyDown();
+		switch (_CurKey)
 		{
 		case KEY_ESC:		// ESC 키
 			return;
 		case KEY_SPACE:		// SPACE BAR 키
-			bIsJumpping = true;
+			_IsJumpping = true;
 			break;
 		default:
 			break;
 		}
 
-		// 점프 관련
+		int Dinoy = dino->Y();
 		// 점프 중인가
-		if (bIsJumpping)
+		if (_IsJumpping)
 		{
 			// 최고 지점에 이르지 않았다면
-			if(dinoY < MAX_JUMP && bIsJumpped == false)
-				dinoY++;
+			if (Dinoy < MAX_JUMP && _maxHeight == false)
+				Dinoy++;
 			// 최고 지점에 도달 후 점프가 끝났다면
-			else if (bIsJumpped && dinoY == 0)
+			else if (_maxHeight && Dinoy == 0)
 			{
-				bIsJumpped = false;
-				bIsJumpping = false;
+				_maxHeight = false;
+				_IsJumpping = false;
 			}
 			// 최고 지점에 도달 후라면 (중력을 표현)
-			else if (bIsJumpped)
-				dinoY--;
+			else if (_maxHeight)
+				Dinoy--;
 			// 최고 지점에 도달했다면
-			else if (dinoY == MAX_JUMP)
-				bIsJumpped = true;
+			else if (Dinoy == MAX_JUMP)
+				_maxHeight = true;
 		}
 		// 점프 중이 아니라면
 		else
 		{
-			if (dinoY > 0)
-				dinoY--;
+			if (Dinoy > 0)
+				Dinoy--;
 		}
 
+		dino->setDinoY(Dinoy);
+		int treeX = tree->X();
 		// 나무 위치 관련
 		treeX -= 2;
 		if(treeX <=0)
@@ -91,13 +99,14 @@ void Game_manager::GameStart() {
 		{
 			// 공룡의 Y위치가 충돌 가능 위치이고
 			// 나무의 X위치가 충돌 가능 위치라면
-			if (dinoY < Y_COLLISION && treeX > TREE_END + 1)
+			if (Dinoy  < Y_COLLISION && treeX > TREE_END + 1)
 				bIsCollision = true;
 		}
 
 		//엔티티 그리기
-		entity->drawTree(treeX);
-		entity->drawDino(dinoY);
+		tree->setTreeX(treeX);
+		tree->drawEntity();
+		dino->drawEntity();
 
 		Sleep(SLEEP_TIME);
 		system("cls");
@@ -105,18 +114,15 @@ void Game_manager::GameStart() {
 		// 충돌 시 게임 오버
 		if (bIsCollision)
 		{
-			std::cout<<"\n";
-			std::cout << "\n";
-			std::cout << "            Game Over\n";
-			std::cout << "           "<< nScore<<"\n";
-			system("pause");
-			return;
+			// 점수 출력
+			drawEnd(_Score);
+			return ;
 		}
 		// 충돌 상태가 아닐 때는 점수 증가
 		else
 		{
-			nScore += 1;
+			_Score += 1;
+			drawScore(_Score);
 		}
 	}
-	delete entity;
 }
