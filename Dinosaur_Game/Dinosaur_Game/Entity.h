@@ -7,9 +7,9 @@ protected:
 	int _Y=0;
 	int _X=0;
 public:
-	void setDinoY(int Y);
-	void setTreeX(int X);
-	inline int Y() { return _Y; }
-	inline int X() { return _X; }
+	void setY(int Y);
+	void setX(int X);
+	int Y() { return _Y; }
+	int X() { return _X; }
 	virtual void drawEntity();
 };

@@ -5,8 +5,9 @@
 
 class DinoEntity : public Entity
 {
+public:
+	bool _leg=true;
 public:	
 	DinoEntity();
 	void drawEntity();
 };
-

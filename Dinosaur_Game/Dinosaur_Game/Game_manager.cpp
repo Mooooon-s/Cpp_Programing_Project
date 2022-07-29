@@ -1,7 +1,6 @@
 #include "Game_manager.h"
 #include<iostream>
 
-
 void Game_manager::Init() {
 	system("mode con:cols=100 lines=25");
 	system("title Dino");
@@ -21,26 +20,24 @@ void Game_manager::CursorSetting()
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
 
-void Game_manager::MoveCursor(int dinoX,int dinoY) {
+void Game_manager::gotoXY(int dinoX,int dinoY) {
 	COORD cursorPos = { (SHORT)dinoX, (SHORT)dinoY };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPos);
 }
 
 void Game_manager::drawScore(int score) {
-	MoveCursor(0, 0);
+	gotoXY(0, 0);
 	std::cout << "Score: " << score << "\n";
 }
 
 void Game_manager::drawEnd(int score) {
-	std::cout << "\n";
-	std::cout << "\n";
-	std::cout << "            Game Over\n";
-	std::cout << "           " << _Score << "\n";
+	std::cout << "\n\n\n\n\n";
+	std::cout << "\t\t\t\t\tGame Over\n";
+	std::cout << "\t\t\t\t\tScore: " << _Score << "\n\n\n\n\n\n";
 	system("pause");
 }
 
 void Game_manager::GameStart() {
-	
 	DinoEntity* dino = new DinoEntity;
 	TreeEntity* tree = new TreeEntity;
 
@@ -86,25 +83,26 @@ void Game_manager::GameStart() {
 				Dinoy--;
 		}
 
-		dino->setDinoY(Dinoy);
+		dino->setY(Dinoy);
 		int treeX = tree->X();
 		// 나무 위치 관련
 		treeX -= 2;
-		if(treeX <=0)
+		if (treeX <= 0) {
 			treeX = TREE_START;
-
-		 //충돌 관련
-		 //나무의 X위치가 충돌 가능 X위치라면
+			tree->setTree();
+		}
+		//충돌 관련
+		//나무의 X위치가 충돌 가능 X위치라면
 		if (treeX < TREE_COLLISION)
 		{
 			// 공룡의 Y위치가 충돌 가능 위치이고
 			// 나무의 X위치가 충돌 가능 위치라면
 			if (Dinoy  < Y_COLLISION && treeX > TREE_END + 1)
-				bIsCollision = true;
+				_Collision = true;
 		}
 
 		//엔티티 그리기
-		tree->setTreeX(treeX);
+		tree->setX(treeX);
 		tree->drawEntity();
 		dino->drawEntity();
 
@@ -112,7 +110,7 @@ void Game_manager::GameStart() {
 		system("cls");
 
 		// 충돌 시 게임 오버
-		if (bIsCollision)
+		if (_Collision)
 		{
 			// 점수 출력
 			drawEnd(_Score);
@@ -125,4 +123,5 @@ void Game_manager::GameStart() {
 			drawScore(_Score);
 		}
 	}
+	delete dino, tree;
 }

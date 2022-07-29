@@ -1,6 +1,9 @@
 #include<iostream>
+#include<Windows.h>
+#include<conio.h>
 #include"Entity.h"
 #include"Game_manager.h"
+#include"setting.h"
 using namespace std;
 
 int main(void) {
