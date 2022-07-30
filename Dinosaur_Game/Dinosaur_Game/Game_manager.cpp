@@ -20,8 +20,8 @@ void Game_manager::CursorSetting()
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
 
-void Game_manager::gotoXY(int dinoX,int dinoY) {
-	COORD cursorPos = { (SHORT)dinoX, (SHORT)dinoY };
+void Game_manager::gotoXY(int X,int Y) {
+	COORD cursorPos = { (SHORT)X, (SHORT)Y };
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), cursorPos);
 }
 
@@ -87,7 +87,7 @@ void Game_manager::GameStart() {
 		int treeX = tree->X();
 		// 나무 위치 관련
 		treeX -= 2;
-		if (treeX <= 0) {
+		if (treeX <= -2 ) {
 			treeX = TREE_START;
 			tree->setTree();
 		}
