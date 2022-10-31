@@ -23,6 +23,7 @@ Game Analysis
     * Etc..
     
  ## Run
+ You can run using Visualstudio
  
 ![Dino](https://user-images.githubusercontent.com/64954014/199046479-360ff607-1cc0-4c59-b7a5-4fa6ab2d70e9.PNG)
 
