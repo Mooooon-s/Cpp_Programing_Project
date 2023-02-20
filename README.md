@@ -1,4 +1,4 @@
-# cpp_programing_project
+# Cpp_Programing_Project
 * This project is to master OOP based on what I learned in the class
 * Dino Game
 
@@ -7,7 +7,7 @@
 It's a Killing time game you can play on Google
 
 ## Getting Started
-Using Visual Studio C++
+Using Visual Studio / C++
 
 Game Analysis
 * Understanding about Game
